@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 font-weight-bold">
+      <input [(ngModel)]="fNumber" (ngModelChange)="filterByNumber()" type="text">
+    </div>
+    <div class="col-3 font-weight-bold">
+      <input [(ngModel)]="fStatus" (ngModelChange)="filterByStatus()" type="text">
+    </div>
+    <div class="col-2 font-weight-bold"></div>
+    <div class="col-5 font-weight-bold"></div>
+  </div>
+  <div class="row">
+    <div class="col-2 font-weight-bold">Number</div>
+    <div class="col-3 font-weight-bold">Status</div>
+    <div class="col-2 font-weight-bold">Last Updated</div>
+    <div class="col-5 font-weight-bold">Description</div>
+  </div>
+  <div class="row case" *ngFor="let caseDoc of filteredCases | orderDate | pager:currentPage:10">
+    <div class="col-2">{{caseDoc.number}}</div>
+    <div class="col-3">{{caseDoc.status}}</div>
+    <div class="col-2">{{caseDoc.lastUpdate | date:'MM/dd/yyyy'}}</div>
+    <div class="col-5">
+      <div class="row">
+        <div class="col-12 description">{{caseDoc.description}}</div>
+        <div class="col-12" *ngFor="let hist of caseDoc.history">
+          <div class="row">
+            <div class="col-2">{{hist.when | date:'MM/dd/yyyy' }}</div>
+            <div class="col-10">{{hist.info}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pager d-flex flex-wrap">
+    <span (click)="goToPage(i)" *ngFor="let p of pages(); index as i" [ngClass]="{'active': i === currentPage}">
+      {{i}}
+    </span>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

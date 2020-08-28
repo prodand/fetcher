@@ -1,0 +1,19 @@
+.case {
+  margin-bottom: 15px;
+  .description {
+    margin-bottom: 15px;
+  }
+}
+
+.pager span {
+  display: block;
+  cursor: pointer;
+  color: blue;
+  padding: 2px 5px;
+  margin-right: 5px;
+}
+
+.pager span.active {
+  cursor: default;
+  color: black;
+}
